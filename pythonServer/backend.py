@@ -194,7 +194,6 @@ def vendorGet(vendorId):
                 items.append(itemsa)
         vendorData["particularVendorData"]=vendorDict
         vendorData["itemIds"]=items
-        print(vendorData)
         return {
             'status': 200,
             'vendorData': vendorData
