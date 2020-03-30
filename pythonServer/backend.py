@@ -453,14 +453,17 @@ def invoicePurchaseOrderItemsGet(orderId):
         orderFile = u2py.File("PO.ORDER.MST")
         data=[]
         items=list(orderFile.readv(orderId,11))
+        sumCheck=0
         for i in range(len(items)):
                 itemDetails={}
                 itemDetails['itemIds']=(list(orderFile.readv(orderId,11))[i][0])
                 itemDetails['itemCost']=(list(orderFile.readv(orderId,13))[i][0])
                 itemDetails['itemQuantity']=(list(orderFile.readv(orderId,12))[i][0])
                 itemDetails['quantityPending']=(list(orderFile.readv(orderId,15))[i][0])
+                sumCheck=sumCheck+(list(orderFile.readv(orderId,15))[i][0])
                 data.append(itemDetails)
         response={
+                  "sumCheck":sumCheck
                   "data":data
                  }
         return Response(
